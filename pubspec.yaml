@@ -45,9 +45,7 @@ dependencies:
   firebase_core:
   firebase_auth:
   flutter_local_notifications: 
-  firebase_messaging: 
   permission_handler: 
-  cloud_firestore:
   another_flushbar:
   flutter_launcher_icons:
   flutter_toggle_tab: 
@@ -55,6 +53,10 @@ dependencies:
   card_swiper:
   smooth_page_indicator:
   intl: ^0.19.0
+  printing: ^5.13.3
+  pdf: ^3.11.1
+  open_file: ^3.5.9
+  path_provider: ^2.1.4
   
 
 dev_dependencies:
@@ -83,6 +85,7 @@ flutter:
   assets:
     - assets/
     - assets/themes/
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

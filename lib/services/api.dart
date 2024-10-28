@@ -10,11 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Api {
   Future<Response> get(String url) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var token = jsonDecode(pref.getString("token") ?? "");
+    var token = pref.getString("token") ?? "";
 
     final response = await http.get(Uri.parse(url), headers: {
-      "Authorization": "Bearer ${token['access_token']}",
-      "Accept": "application/json"
+      "Authorization": "Bearer $token",
+      "Accept": "application/json",
+      
     });
 
     if (response.statusCode == 401) {

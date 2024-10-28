@@ -49,7 +49,7 @@ class AuthenticationProvider extends BaseProvider {
       printDebug("TOKEN ISS:   ${data['access_token']}");
       return true;
     } else {
-            printDebug("Response code decoded data ELSEEE : ${jsonDecode(response.body)}");
+            printDebug("Response code decoded data ELSE : ${jsonDecode(response.body)}");
 
       setIsFailed(true);
       printDebug(response.body);

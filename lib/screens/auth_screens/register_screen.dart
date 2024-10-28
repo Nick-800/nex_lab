@@ -84,338 +84,309 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: getSize(context).width * 1,
                 height: getSize(context).height * 0.8,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Register',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
-                        const Divider(),
-                        const SizedBox(height: 48),
-                        SizedBox(
-                          height: getSize(context).height * 0.5,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                ConstrainedBox(
-                                  constraints: BoxConstraints.loose(Size(
-                                      getSize(context).width * 0.8,
-                                      getSize(context).height * 0.45)),
-                                  child: PageView.builder(
-                                    controller: pageController,
-                                    itemCount: 2,
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        color: Colors.white,
-                                        child: index == 0
-                                            ? Padding(
-                                                padding:
-                                                    const EdgeInsets.all(16.0),
-                                                child: Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child:
-                                                              CustomTextField(
-                                                                  icon: const Icon(
-                                                                      Icons
-                                                                          .tag),
-                                                                  label:
-                                                                      "First name",
-                                                                  textEditingController:
-                                                                      firstNameController,
-                                                                  validate:
-                                                                      (value) {
-                                                                    if (value ==
-                                                                            null ||
-                                                                        value
-                                                                            .isEmpty) {
-                                                                      return 'Please enter your name';
-                                                                    }
-                                                                    return null;
-                                                                  }),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 12,
-                                                        ),
-                                                        Expanded(
-                                                          child:
-                                                              CustomTextField(
-                                                                  icon: const Icon(
-                                                                      Icons
-                                                                          .tag),
-                                                                  label: "Name",
-                                                                  textEditingController:
-                                                                      lastNameController,
-                                                                  validate:
-                                                                      (value) {
-                                                                    if (value ==
-                                                                            null ||
-                                                                        value
-                                                                            .isEmpty) {
-                                                                      return 'Please enter your name';
-                                                                    }
-                                                                    return null;
-                                                                  }),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    CustomTextField(
-                                                      icon: const Icon(
-                                                          Icons.email),
-                                                      label: "Email",
-                                                      textEditingController:
-                                                          emailController,
-                                                      validate: (value) {
-                                                        if (value == null ||
-                                                            value.isEmpty) {
-                                                          return 'Please enter your email';
-                                                        }
-                                                        if (!RegExp(
-                                                                r'^[^@]+@[^@]+\.[^@]+')
-                                                            .hasMatch(value)) {
-                                                          return 'Please enter a valid email';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                    CustomTextField(
+                      ),
+                      const Divider(),
+                      const SizedBox(height: 48),
+                      SizedBox(
+                        height: getSize(context).height * 0.5,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              ConstrainedBox(
+                                constraints: BoxConstraints.loose(Size(
+                                    getSize(context).width * 0.8,
+                                    getSize(context).height * 0.48)),
+                                child: PageView.builder(
+                                  controller: pageController,
+                                  itemCount: 2,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      color: Colors.white,
+                                      child: index == 0
+                                          ? Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: CustomTextField(
+                                                            icon: const Icon(
+                                                                Icons.tag),
+                                                            label: "Name",
+                                                            textEditingController:
+                                                                firstNameController,
+                                                            validate: (value) {
+                                                              if (value ==
+                                                                      null ||
+                                                                  value
+                                                                      .isEmpty) {
+                                                                return 'Required field';
+                                                              }
+                                                              return null;
+                                                            }),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 12,
+                                                      ),
+                                                      Expanded(
+                                                        child: CustomTextField(
+                                                            icon: const Icon(
+                                                                Icons.tag),
+                                                            label: "Surname",
+                                                            textEditingController:
+                                                                lastNameController,
+                                                            validate: (value) {
+                                                              if (value ==
+                                                                      null ||
+                                                                  value
+                                                                      .isEmpty) {
+                                                                return 'Required field';
+                                                              }
+                                                              return null;
+                                                            }),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  CustomTextField(
+                                                    icon:
+                                                        const Icon(Icons.email),
+                                                    label: "Email",
+                                                    textEditingController:
+                                                        emailController,
+                                                    validate: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'Please enter your email';
+                                                      }
+                                                      if (!RegExp(
+                                                              r'^[^@]+@[^@]+\.[^@]+')
+                                                          .hasMatch(value)) {
+                                                        return 'Please enter a valid email';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                  CustomTextField(
+                                                    icon:
+                                                        const Icon(Icons.lock),
+                                                    secureText: true,
+                                                    label: "Password",
+                                                    textEditingController:
+                                                        passwordController,
+                                                    validate: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'Please enter your password';
+                                                      }
+                                                      if (value.length < 8) {
+                                                        return 'Password must be at least 8 characters long';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                  CustomTextField(
                                                       icon: const Icon(
                                                           Icons.lock),
-                                                      secureText: true,
-                                                      label: "Password",
+                                                      label: "Confirm Password",
                                                       textEditingController:
-                                                          passwordController,
+                                                          confirmPasswordController,
                                                       validate: (value) {
                                                         if (value == null ||
                                                             value.isEmpty) {
                                                           return 'Please enter your password';
                                                         }
-                                                        if (value.length < 8) {
-                                                          return 'Password must be at least 8 characters long';
+                                                        if (value !=
+                                                            passwordController
+                                                                .text) {
+                                                          return 'Password does not match';
                                                         }
                                                         return null;
-                                                      },
-                                                    ),
-                                                    CustomTextField(
-                                                        icon: const Icon(
-                                                            Icons.lock),
-                                                        label:
-                                                            "Confirm Password",
-                                                        textEditingController:
-                                                            confirmPasswordController,
-                                                        validate: (value) {
-                                                          if (value == null ||
-                                                              value.isEmpty) {
-                                                            return 'Please enter your password';
-                                                          }
-                                                          if (value !=
-                                                              passwordController
-                                                                  .text) {
-                                                            return 'Password does not match';
-                                                          }
-                                                          return null;
-                                                        }),
-                                                  ],
-                                                ),
-                                              )
-                                            : Padding(
-                                                padding:
-                                                    const EdgeInsets.all(16.0),
-                                                child: Column(
-                                                  children: [
-                                                    CustomTextField(
-                                                      icon: const Icon(
-                                                          Icons.phone),
-                                                      label: "Phone",
-                                                      textEditingController:
-                                                          phoneController,
-                                                      validate: (value) {
-                                                        if (value == null ||
-                                                            value.isEmpty) {
-                                                          return 'Please enter your phone number';
-                                                        }
-                                                        if (value.length !=
-                                                            10) {
-                                                          return 'Phone number must be exactly 10 digits';
-                                                        }
-                                                        return null;
-                                                      },
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 24,
-                                                    ),
-                                                    // CustomTextField(
-                                                    //     icon: const Icon(
-                                                    //         Icons.people),
-                                                    //     label: "Gender",
-                                                    //     textEditingController:
-                                                    //         genderController,
-                                                    //     validate: (value) {
-                                                    //       if (value == null ||
-                                                    //           value.isEmpty) {
-                                                    //         return 'Please enter  your gender';
-                                                    //       }
-                                                    //       if (value != 'male' &&
-                                                    //           value !=
-                                                    //               'female') {
-                                                    //         return 'Please enter a valid gender';
-                                                    //       }
-                                                    //       return null;
-                                                    //     }),
-                                                    TextFormField(
-                                                      controller: dobController,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        icon: const Icon(
-                                                            Icons.date_range),
-                                                        labelText: 'DOB',
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide.none,
-                                                        ),
-                                                        filled: true,
-                                                        fillColor: Colors.black
-                                                            .withOpacity(0.08),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                vertical: 15.0,
-                                                                horizontal:
-                                                                    10.0),
-                                                      ),
-                                                      readOnly: true,
-                                                      onTap: () async {
-                                                        DateTime? pickedDate =
-                                                            await showDatePicker(
-                                                          context: context,
-                                                          initialDate:
-                                                              DateTime.now(),
-                                                          firstDate:
-                                                              DateTime(1900),
-                                                          lastDate:
-                                                              DateTime.now(),
-                                                        );
-
-                                                        if (pickedDate !=
-                                                            null) {
-                                                          String formattedDate =
-                                                              DateFormat(
-                                                                      'dd-MM-yyyy')
-                                                                  .format(
-                                                                      pickedDate);
-                                                          setState(() {
-                                                            dobController.text =
-                                                                formattedDate;
-                                                          });
-                                                        }
-                                                      },
-                                                      validator: (value) {
-                                                        if (value == null ||
-                                                            value.isEmpty) {
-                                                          return 'Please enter your date of birth';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 24,
-                                                    ),
-                                                    DropdownButtonFormField<
-                                                        String>(
-                                                      decoration:
-                                                          InputDecoration(
-                                                        icon: const Icon(
-                                                            Icons.people),
-                                                        labelText: 'Gender',
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          borderSide:
-                                                              BorderSide.none,
-                                                        ),
-                                                        filled: true,
-                                                        fillColor: Colors.black
-                                                            .withOpacity(0.08),
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                vertical: 15.0,
-                                                                horizontal:
-                                                                    10.0),
-                                                      ),
-                                                      value: selectedGender,
-                                                      items: genderOptions
-                                                          .map((String gender) {
-                                                        return DropdownMenuItem<
-                                                            String>(
-                                                          value: gender,
-                                                          child: Text(gender),
-                                                        );
-                                                      }).toList(),
-                                                      onChanged:
-                                                          (String? newValue) {
-                                                        setState(() {
-                                                          selectedGender =
-                                                              newValue;
-                                                        });
-                                                      },
-                                                      validator: (value) {
-                                                        if (value == null ||
-                                                            value.isEmpty) {
-                                                          return 'Please select your gender';
-                                                        }
-                                                        return null;
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
+                                                      }),
+                                                ],
                                               ),
-                                      );
-                                    },
-                                  ),
+                                            )
+                                          : Padding(
+                                              padding:
+                                                  const EdgeInsets.all(16.0),
+                                              child: Column(
+                                                children: [
+                                                  CustomTextField(
+                                                    icon:
+                                                        const Icon(Icons.phone),
+                                                    label: "Phone",
+                                                    textEditingController:
+                                                        phoneController,
+                                                    validate: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'Please enter your phone number';
+                                                      }
+                                                      if (value.length != 10) {
+                                                        return 'Phone number must be exactly 10 digits';
+                                                      }
+                                                      return null;
+                                                    },
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 24,
+                                                  ),
+                                                  TextFormField(
+                                                    controller: dobController,
+                                                    decoration: InputDecoration(
+                                                      floatingLabelBehavior:
+                                                          FloatingLabelBehavior
+                                                              .never,
+                                                      icon: const Icon(
+                                                          Icons.date_range),
+                                                      labelText: 'DOB',
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                      ),
+                                                      filled: true,
+                                                      fillColor: Colors.black
+                                                          .withOpacity(0.08),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                              vertical: 15.0,
+                                                              horizontal: 10.0),
+                                                    ),
+                                                    readOnly: true,
+                                                    onTap: () async {
+                                                      DateTime? pickedDate =
+                                                          await showDatePicker(
+                                                        context: context,
+                                                        initialDate:
+                                                            DateTime.now(),
+                                                        firstDate:
+                                                            DateTime(1900),
+                                                        lastDate:
+                                                            DateTime.now(),
+                                                      );
+
+                                                      if (pickedDate != null) {
+                                                        String formattedDate =
+                                                            DateFormat(
+                                                                    'dd-MM-yyyy')
+                                                                .format(
+                                                                    pickedDate);
+                                                        setState(() {
+                                                          dobController.text =
+                                                              formattedDate;
+                                                        });
+                                                      }
+                                                    },
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'Please enter your date of birth';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 24,
+                                                  ),
+                                                  DropdownButtonFormField<
+                                                      String>(
+                                                    decoration: InputDecoration(
+                                                      floatingLabelBehavior:
+                                                          FloatingLabelBehavior
+                                                              .never,
+                                                      icon: const Icon(
+                                                          Icons.people),
+                                                      labelText: 'Gender',
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                      ),
+                                                      filled: true,
+                                                      fillColor: Colors.black
+                                                          .withOpacity(0.08),
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                              vertical: 15.0,
+                                                              horizontal: 10.0),
+                                                    ),
+                                                    value: selectedGender,
+                                                    items: genderOptions
+                                                        .map((String gender) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: gender,
+                                                        child: Text(gender),
+                                                      );
+                                                    }).toList(),
+                                                    onChanged:
+                                                        (String? newValue) {
+                                                      setState(() {
+                                                        selectedGender =
+                                                            newValue;
+                                                      });
+                                                    },
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value.isEmpty) {
+                                                        return 'Please select your gender';
+                                                      }
+                                                      return null;
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                    );
+                                  },
                                 ),
-                                SmoothPageIndicator(
-                                  controller: pageController,
-                                  count: 2,
-                                  effect: const WormEffect(
-                                    dotColor: Colors.grey,
-                                    activeDotColor: mainColor,
-                                  ),
+                              ),
+                              SmoothPageIndicator(
+                                controller: pageController,
+                                count: 2,
+                                effect: const WormEffect(
+                                  dotColor: Colors.grey,
+                                  activeDotColor: mainColor,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        isLoading
-                            ? const CircularProgressIndicator()
-                            : MainButton(
-                                text: "Register",
-                                onPressed: () => register(formKey)),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 20),
+                      isLoading
+                          ? const CircularProgressIndicator()
+                          : MainButton(
+                              text: "Register",
+                              onPressed: () => register(formKey)),
+                    ],
                   ),
                 ),
               ),

@@ -1,14 +1,19 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/helpers/functions_helper.dart';
+import 'package:nex_lab/models/bookedtest.dart';
+import 'package:nex_lab/models/test_report.dart';
 import 'package:nex_lab/providers/authentication_provider.dart';
-import 'package:nex_lab/screens/auth_screens/login_screen.dart';
-import 'package:nex_lab/screens/auth_screens/register_screen.dart';
 import 'package:nex_lab/screens/auth_screens/screen_router.dart';
+import 'package:nex_lab/screens/main_screens/inhome_screens/bookedtests_screen.dart';
+import 'package:nex_lab/screens/main_screens/inhome_screens/tests_sceen.dart';
+// import 'package:nex_lab/main_screens/inhome_screens/bookedtests_screen.dart';
+// import 'package:nex_lab/screens/inhome_screens/tests_sceen.dart';
+import 'package:nex_lab/screens/result_screen.dart';
+import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
 import 'package:provider/provider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,54 +23,139 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final PageController _swiperController = PageController();
+  bool isDarkMode = false;
+  int _selectedIndex = 0;
+  int _currentSwappableIndex = 0;
+  List<BookedTest> bookedTests = [];
+  List<TestReport> testReports = [];
+
+  void _bookTest(BookedTest bookedTest) {
+    setState(() {
+      if (!bookedTests.any((test) => test.name == bookedTest.name)) {
+        bookedTests.add(bookedTest);
+        // Add a test report for demonstration purposes
+        testReports.add(TestReport(
+          testName: bookedTest.name,
+          date: bookedTest.dateTime,
+          result: "Positive", // Example result
+        ));
+      }
+    });
+  }
+
+  Widget _buildSwappableRow() {
+    final titles = ['Tests', 'Booked Tests'];
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: List.generate(titles.length, (index) {
+        return GestureDetector(
+          onTap: () => setState(() => _currentSwappableIndex = index),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: _currentSwappableIndex == index
+                  ? Colors.blue.withOpacity(0.5)
+                  : greyColor,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Text(
+                titles[index],
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
+                  color: _currentSwappableIndex == index
+                      ? Colors.white
+                      : Colors.black,
+                ),
+              ),
+            ),
+          ),
+        );
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade50,
+        title: Image.asset('assets/icons/nexlab_logo.png',
+            width: 189, height: 33, fit: BoxFit.contain),
+        actions: [
+          const Icon(Icons.circle_notifications, color: Colors.black, size: 40)
+        ],
+        centerTitle: true,
+        elevation: 0,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            ConstrainedBox(
-              constraints: BoxConstraints.loose(Size(
-                  MediaQuery.of(context).size.width * 0.8,
-                  MediaQuery.of(context).size.height * 0.8)),
-              child: PageView.builder(
-                controller: _swiperController,
-                itemCount: 2,
-                itemBuilder: (context, index) {
-                  return Container(
-                    color: index.isEven ? Colors.red : Colors.blue,
-                    child: index == 0
-                        ? const LoginScreen()
-                        : const RegisterScreen(),
-                  );
-                },
-              ),
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue.shade50),
+              child: const Text('Nexlab',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             ),
-            SmoothPageIndicator(
-              controller: _swiperController,
-              count: 2,
-              effect: const WormEffect(
-                dotColor: Colors.grey,
-                activeDotColor: mainColor,
-              ),
+            ListTile(
+              title: const Text('Darkmode'),
+              trailing: Switch(
+                  value: isDarkMode,
+                  onChanged: (value) => setState(() => isDarkMode = value)),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  // Your button action here
-                },
-                child: const Text("Button")),
-            ElevatedButton(
+            ListTile(
+                title: const Text('About'),
+                onTap: () => Navigator.pop(context)),
+            ListTile(
+                title: const Text('Contact'),
+                onTap: () => Navigator.pop(context)),
+            MainButton(
                 onPressed: () {
                   Provider.of<AuthenticationProvider>(context, listen: false)
                       .logout()
-                      .then((loggedOut) => push(context, const ScreenRouter()));
+                      .then((loggedOut) {
+                    if (loggedOut) {
+                      push(context, const ScreenRouter());
+                    }
+                  });
                 },
-                child: const Text("Logout")),
+                text: "Logout")
           ],
         ),
+      ),
+      body: _selectedIndex == 1
+          ? Column(
+              children: [
+                _buildSwappableRow(),
+                Expanded(
+                  child: IndexedStack(
+                    index: _currentSwappableIndex,
+                    children: [
+                      Tests_Screen(onTestBooked: _bookTest),
+                      BookedTestsScreen(bookedTests: bookedTests),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          : (_selectedIndex == 0
+              ? const ResultScreen()
+              : const Center(
+                  child: Text(
+                      'Profile Screen'))), // Placeholder for Profile screen
+      bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Colors.blue,
+        unselectedItemColor: Colors.blue,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Results'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: (index) => setState(() {
+          _selectedIndex = index;
+        }),
       ),
     );
   }

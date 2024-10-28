@@ -65,8 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Form(
               key: formKey,
               child: CustomFormCard(
-                width: getSize(context).width * 0.8,
-                height: getSize(context).height * 0.6,
+                width: getSize(context).width * 0.85,
+                height: getSize(context).height * 0.65,
                 child: Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: Column(
@@ -115,11 +115,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 20),
                       isLoading
                           ? const CircularProgressIndicator()
-                          : MainButton(text: "Login", onPressed: () => login(formKey),inProgress: isLoading),
-              
-                          MainButton(text: "Register", onPressed: ()=>push(context, const RegisterScreen()),
-                          btnColor: Colors.white,txtColor: mainColor,),
-                    
+                          : MainButton(
+                              text: "Login",
+                              onPressed: () => login(formKey),
+                              inProgress: isLoading),
+                      MainButton(
+                        text: "Register",
+                        onPressed: () => push(context, const RegisterScreen()),
+                        btnColor: Colors.white,
+                        txtColor: mainColor,
+                      ),
                     ],
                   ),
                 ),
