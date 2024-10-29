@@ -12,8 +12,6 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  late String fileName;
-
   @override
   void initState() {
     // Call getResults when the screen is first displayed
@@ -52,12 +50,12 @@ class _ResultScreenState extends State<ResultScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
-                    decoration: const BoxDecoration(
-                      color: secondColor
-                    ),
+                    decoration: const BoxDecoration(color: mainColor),
                     child: ListTile(
-                      title: Text('Result Name: ${result.filePath.substring(8,13)}'),
-                      subtitle: Text('Date: ${result.filePath.substring(14,24)} \nTime: ${result.filePath.substring(25,33).replaceAll(r'-', r':')}'),
+                      title: Text(
+                          'Result Name: ${result.filePath.substring(8, 13)}'),
+                      subtitle: Text(
+                          'Date: ${result.filePath.substring(14, 24)} \nTime: ${result.filePath.substring(25, 33).replaceAll(r'-', r':')}'),
                       trailing: IconButton(
                         icon: const Icon(Icons.picture_as_pdf),
                         onPressed: () async {
@@ -66,7 +64,6 @@ class _ResultScreenState extends State<ResultScreen> {
                       ),
                     ),
                   ),
-                  
                 ),
               );
             },

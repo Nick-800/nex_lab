@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nex_lab/providers/authentication_provider.dart';
 import 'package:nex_lab/providers/result_provider.dart';
+import 'package:nex_lab/providers/test_provider.dart';
 import 'package:nex_lab/screens/auth_screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<AuthenticationProvider>(
             create: (_) => AuthenticationProvider()),
-        ChangeNotifierProvider<ResultProvider>(create: (_) => ResultProvider())
+        ChangeNotifierProvider<ResultProvider>(create: (_) => ResultProvider()),
+        ChangeNotifierProvider<TestProvider>(create: (_)=> TestProvider())
       ],
       child: MaterialApp(
         

@@ -13,7 +13,6 @@ class AuthenticationProvider extends BaseProvider {
   initializeAuthProvider() async {
     setIsLoading(true);
     SharedPreferences pref = await SharedPreferences.getInstance();
-
     String? token = pref.getString("token");
     printDebug("The Token is: $token");
     isAuthed = (token != null);
@@ -49,7 +48,8 @@ class AuthenticationProvider extends BaseProvider {
       printDebug("TOKEN ISS:   ${data['access_token']}");
       return true;
     } else {
-            printDebug("Response code decoded data ELSE : ${jsonDecode(response.body)}");
+      printDebug(
+          "Response code decoded data ELSE : ${jsonDecode(response.body)}");
 
       setIsFailed(true);
       printDebug(response.body);

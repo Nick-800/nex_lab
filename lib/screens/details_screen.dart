@@ -1,14 +1,17 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
+import 'package:nex_lab/models/test_model.dart';
 
 class TestDetailsScreen extends StatelessWidget {
-  final String testName;
-  const TestDetailsScreen({super.key, required this.testName});
+  final TestModel tm;
+  const TestDetailsScreen({super.key, required this.tm});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(testName),
+        title: Text(tm.testName),
         backgroundColor: Colors.blue.shade50,
       ),
       body: Padding(
@@ -31,7 +34,7 @@ class TestDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Details for $testName',
+                'Details for ${tm.testName}',
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
@@ -41,10 +44,8 @@ class TestDetailsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                'Purpose of the test:\n '
-                'It will tell the current values of your $testName \n'
-                'What the results mean\n'
-                'Any preparation needed before the test\n',
+                'Description:\n '
+                '${tm.testDescription}',
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
@@ -54,7 +55,7 @@ class TestDetailsScreen extends StatelessWidget {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Confirmation'),
-                      content: Text('Are you sure you want to take the $testName test?'),
+                      content: Text('Are you sure you want to take the ${tm.testName} test?'),
                       actions: [
                         TextButton(
                           onPressed: () {
@@ -66,7 +67,7 @@ class TestDetailsScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('You have confirmed to take the $testName test.')),
+                              SnackBar(content: Text('You have confirmed to take the ${tm.testName} test.')),
                             );
                           },
                           child: const Text('Confirm'),

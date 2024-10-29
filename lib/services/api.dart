@@ -69,11 +69,10 @@ class Api {
     return response;
   }
 
-//Noice
   Future<bool> refreshToken() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var oldToken = pref.getString('token');
-    final response = await http.post(Uri.parse("$baseUrl/refresh"), headers: {
+    final response = await http.post(Uri.parse("$baseUrl/api/refresh"), headers: {
       "Accept": "application/json",
       "Authorization": "Bearer $oldToken",
     });
