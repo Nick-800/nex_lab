@@ -2,23 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nex_lab/models/bookedtest.dart';
 import 'package:nex_lab/models/test_model.dart';
 import 'package:nex_lab/providers/test_provider.dart';
 import 'package:nex_lab/screens/details_screen.dart';
 import 'package:provider/provider.dart';
 
 
-class Tests_Screen extends StatefulWidget {
-  final Function(BookedTest) onTestBooked;
+class TestsScreen extends StatefulWidget {
 
-  const Tests_Screen({super.key, required this.onTestBooked});
+  const TestsScreen({super.key,});
 
   @override
-  _Tests_ScreenState createState() => _Tests_ScreenState();
+  _TestsScreenState createState() => _TestsScreenState();
 }
 
-class _Tests_ScreenState extends State<Tests_Screen> {
+class _TestsScreenState extends State<TestsScreen> {
 
   @override
   void initState() {
@@ -108,17 +106,6 @@ class _Tests_ScreenState extends State<Tests_Screen> {
                     initialTime: TimeOfDay.now(),
                   );
                   if (selectedTime != null) {
-                    final bookedTest = BookedTest(
-                      name: textList[index],
-                      dateTime: DateTime(
-                        selectedDate.year,
-                        selectedDate.month,
-                        selectedDate.day,
-                        selectedTime.hour,
-                        selectedTime.minute,
-                      ),
-                    );
-                    widget.onTestBooked(bookedTest);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => TestDetailsScreen(tm: test)),

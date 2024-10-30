@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/helpers/functions_helper.dart';
-import 'package:nex_lab/models/bookedtest.dart';
-import 'package:nex_lab/models/test_report.dart';
 import 'package:nex_lab/providers/authentication_provider.dart';
 import 'package:nex_lab/screens/auth_screens/screen_router.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/bookedtests_screen.dart';
@@ -26,22 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isDarkMode = false;
   int _selectedIndex = 0;
   int _currentSwappableIndex = 0;
-  List<BookedTest> bookedTests = [];
-  List<TestReport> testReports = [];
 
-  void _bookTest(BookedTest bookedTest) {
-    setState(() {
-      if (!bookedTests.any((test) => test.name == bookedTest.name)) {
-        bookedTests.add(bookedTest);
-        // Add a test report for demonstration purposes
-        testReports.add(TestReport(
-          testName: bookedTest.name,
-          date: bookedTest.dateTime,
-          result: "Positive", // Example result
-        ));
-      }
-    });
-  }
+  
 
   Widget _buildSwappableRow() {
     final titles = ['Tests', 'Booked Tests'];
@@ -132,8 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: IndexedStack(
                     index: _currentSwappableIndex,
                     children: [
-                      Tests_Screen(onTestBooked: _bookTest),
-                      BookedTestsScreen(bookedTests: bookedTests),
+                      const TestsScreen(),
+                      const BookedTestsScreen()
+                      // const BookedTestsScreen(),
                     ],
                   ),
                 ),

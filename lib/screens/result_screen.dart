@@ -5,7 +5,7 @@ import 'package:nex_lab/providers/result_provider.dart';
 import 'package:nex_lab/models/user_result_model.dart';
 
 class ResultScreen extends StatefulWidget {
-  const ResultScreen({super.key});
+  const ResultScreen({super.key,});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
