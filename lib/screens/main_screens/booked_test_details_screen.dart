@@ -1,17 +1,19 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/helpers/functions_helper.dart';
 import 'package:nex_lab/models/test_model.dart';
 import 'package:nex_lab/providers/test_provider.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/bookedtests_screen.dart';
+import 'package:nex_lab/widgets/clickables/buttons/cancel_button.dart';
+import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
 import 'package:provider/provider.dart';
 
 class BookedTestDetailsScreen extends StatefulWidget {
   const BookedTestDetailsScreen({
     super.key,
     this.bookedTestId,
-    
     required this.testId,
   });
 
@@ -24,8 +26,6 @@ class BookedTestDetailsScreen extends StatefulWidget {
 }
 
 class _BookedTestDetailsScreenState extends State<BookedTestDetailsScreen> {
-
-
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,8 @@ class _BookedTestDetailsScreenState extends State<BookedTestDetailsScreen> {
       Provider.of<TestProvider>(context, listen: false)
           .getTestById(widget.testId)
           .then((_) {
-        if (Provider.of<TestProvider>(context, listen: false).testById == null) {
+        if (Provider.of<TestProvider>(context, listen: false).testById ==
+            null) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Test not found')),
           );
@@ -58,11 +59,10 @@ class _BookedTestDetailsScreenState extends State<BookedTestDetailsScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: 
-          Container(
+          child: Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
+              color: secondColor,
               borderRadius: BorderRadius.circular(8.0),
               boxShadow: [
                 BoxShadow(
@@ -81,18 +81,21 @@ class _BookedTestDetailsScreenState extends State<BookedTestDetailsScreen> {
                   style: const TextStyle(
                       fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 48),
                 const Text(
                   'Here are the details of this test',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 24),
                 Text(
                   'Description:\n '
                   '${test.testDescription}',
                   style: const TextStyle(fontSize: 16),
                 ),
-                ElevatedButton(
+                const SizedBox(
+                  height: 360,
+                ),
+                CancelButton(
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -101,23 +104,31 @@ class _BookedTestDetailsScreenState extends State<BookedTestDetailsScreen> {
                         content: Text(
                             'Are you sure you want to delete the ${test.testName} test?'),
                         actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: ()  {
-                              push(context, BookedTestsScreen(testId: widget.bookedTestId));
-                            },
-                            child: const Text('Confirm'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              MainButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                text: 'Cancel',
+                              ),
+                              CancelButton(
+                                onPressed: () {
+                                  push(
+                                      context,
+                                      BookedTestsScreen(
+                                          testId: widget.bookedTestId));
+                                },
+                                text: 'Confirm',
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     );
                   },
-                  child: const Text('Delete Booked Test'),
+                  text: 'Delete Booked Test',
                 ),
               ],
             ),

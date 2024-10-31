@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/helpers/functions_helper.dart';
 import 'package:nex_lab/providers/authentication_provider.dart';
+import 'package:nex_lab/providers/booked_tests_provider.dart';
+import 'package:nex_lab/providers/test_provider.dart';
 import 'package:nex_lab/screens/auth_screens/screen_router.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/bookedtests_screen.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/tests_sceen.dart';
@@ -21,6 +23,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    initializeData();
+  }
+
+  void initializeData() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<BookedTestsProvider>(context, listen: false).getBookedTests();
+      Provider.of<TestProvider>(context, listen: false).getTests();
+    });
+  }
+
   bool isDarkMode = false;
   int _selectedIndex = 0;
   int _currentSwappableIndex = 0;
@@ -42,36 +57,20 @@ class _HomeScreenState extends State<HomeScreen> {
           final isSelected = _currentSwappableIndex == index;
           return Expanded(
             child: GestureDetector(
-              onTap: () => setState(() => _currentSwappableIndex = index),
+              onTap: () {
+                setState(() => _currentSwappableIndex = index);
+                initializeData();
+              },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
                 decoration: BoxDecoration(
-                  gradient: isSelected
-                      ? const LinearGradient(
-                          colors: [
-                            Colors.blue,
-                            Colors.blueAccent,
-                            Colors.lightBlue
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        )
-                      : null,
-                  boxShadow: isSelected
-                      ? [
-                          BoxShadow(
-                            color: Colors.blue.withOpacity(0.4),
-                            spreadRadius: 3,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          ),
-                        ]
-                      : [],
-                  borderRadius: BorderRadius.horizontal(
-                    left: Radius.circular(index == 0 ? 16 : 0),
-                    right: Radius.circular(index == titles.length - 1 ? 16 : 0),
+                  color: isSelected ? Colors.blue : Colors.transparent,
+                  border: Border(
+                    bottom: BorderSide(
+                      color: isSelected ? Colors.blue : Colors.transparent,
+                      width: 2,
+                    ),
                   ),
                 ),
                 child: Row(
@@ -105,16 +104,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          
-                  Provider.of<AuthenticationProvider>(context, listen: false)
-                      .logout()
-                      .then((loggedOut) {
-                    if (loggedOut) {
-                      push(context, const ScreenRouter());
-                    }
-                  });
-                },
-        
+          Provider.of<AuthenticationProvider>(context, listen: false)
+              .logout()
+              .then((loggedOut) {
+            if (loggedOut) {
+              push(context, const ScreenRouter());
+            }
+          });
+        },
         child: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
       ),
       appBar: AppBar(
