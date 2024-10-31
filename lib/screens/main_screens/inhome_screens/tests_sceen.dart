@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nex_lab/models/test_model.dart';
 import 'package:nex_lab/providers/test_provider.dart';
-import 'package:nex_lab/screens/details_screen.dart';
+import 'package:nex_lab/screens/main_screens/details_screen.dart';
 import 'package:provider/provider.dart';
 
 

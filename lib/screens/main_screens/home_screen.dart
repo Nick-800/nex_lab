@@ -2,16 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:nex_lab/helpers/consts.dart';
-import 'package:nex_lab/helpers/functions_helper.dart';
-import 'package:nex_lab/providers/authentication_provider.dart';
-import 'package:nex_lab/screens/auth_screens/screen_router.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/bookedtests_screen.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/tests_sceen.dart';
 // import 'package:nex_lab/main_screens/inhome_screens/bookedtests_screen.dart';
 // import 'package:nex_lab/screens/inhome_screens/tests_sceen.dart';
-import 'package:nex_lab/screens/result_screen.dart';
-import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
-import 'package:provider/provider.dart';
+import 'package:nex_lab/screens/main_screens/result_screen.dart';
+import 'package:nex_lab/screens/profile_screens/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,38 +21,78 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   int _currentSwappableIndex = 0;
 
-  
-
   Widget _buildSwappableRow() {
     final titles = ['Tests', 'Booked Tests'];
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: List.generate(titles.length, (index) {
-        return GestureDetector(
-          onTap: () => setState(() => _currentSwappableIndex = index),
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: _currentSwappableIndex == index
-                  ? Colors.blue.withOpacity(0.5)
-                  : greyColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(
-              child: Text(
-                titles[index],
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
-                  color: _currentSwappableIndex == index
-                      ? Colors.white
-                      : Colors.black,
+    final icons = [Icons.science, Icons.bookmark];
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        gradient: LinearGradient(
+          colors: [Colors.grey[300]!, Colors.grey[400]!],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Row(
+        children: List.generate(titles.length, (index) {
+          final isSelected = _currentSwappableIndex == index;
+          return Expanded(
+            child: GestureDetector(
+              onTap: () => setState(() => _currentSwappableIndex = index),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+                decoration: BoxDecoration(
+                  gradient: isSelected
+                      ? const LinearGradient(
+                          colors: [
+                            Colors.blue,
+                            Colors.blueAccent,
+                            Colors.lightBlue
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        )
+                      : null,
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: Colors.blue.withOpacity(0.4),
+                            spreadRadius: 3,
+                            blurRadius: 7,
+                            offset: const Offset(0, 3),
+                          ),
+                        ]
+                      : [],
+                  borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(index == 0 ? 16 : 0),
+                    right: Radius.circular(index == titles.length - 1 ? 16 : 0),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      icons[index],
+                      color: isSelected ? Colors.white : Colors.black,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      titles[index],
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                        color: isSelected ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ),
-        );
-      }),
+          );
+        }),
+      ),
     );
   }
 
@@ -64,49 +100,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade50,
+        backgroundColor: mainColor,
         title: Image.asset('assets/icons/nexlab_logo.png',
             width: 189, height: 33, fit: BoxFit.contain),
         actions: [
-          const Icon(Icons.circle_notifications, color: Colors.black, size: 40)
+          const Icon(Icons.notifications, color: Colors.black, size: 40)
         ],
         centerTitle: true,
         elevation: 0,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue.shade50),
-              child: const Text('Nexlab',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            ),
-            ListTile(
-              title: const Text('Darkmode'),
-              trailing: Switch(
-                  value: isDarkMode,
-                  onChanged: (value) => setState(() => isDarkMode = value)),
-            ),
-            ListTile(
-                title: const Text('About'),
-                onTap: () => Navigator.pop(context)),
-            ListTile(
-                title: const Text('Contact'),
-                onTap: () => Navigator.pop(context)),
-            MainButton(
-                onPressed: () {
-                  Provider.of<AuthenticationProvider>(context, listen: false)
-                      .logout()
-                      .then((loggedOut) {
-                    if (loggedOut) {
-                      push(context, const ScreenRouter());
-                    }
-                  });
-                },
-                text: "Logout")
-          ],
-        ),
       ),
       body: _selectedIndex == 1
           ? Column(
@@ -115,11 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: IndexedStack(
                     index: _currentSwappableIndex,
-                    children: [
-                      const TestsScreen(),
-                      const BookedTestsScreen()
-                      // const BookedTestsScreen(),
-                    ],
+                    children: [const TestsScreen(), const BookedTestsScreen()],
                   ),
                 ),
               ],
@@ -127,8 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
           : (_selectedIndex == 0
               ? const ResultScreen()
               : const Center(
-                  child: Text(
-                      'Profile Screen'))), // Placeholder for Profile screen
+                  child: ProfileScreen())), // Placeholder for Profile screen
       bottomNavigationBar: BottomNavigationBar(
         fixedColor: Colors.blue,
         unselectedItemColor: Colors.blue,
