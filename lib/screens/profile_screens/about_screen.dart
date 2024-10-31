@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/helpers/functions_helper.dart';
 import 'package:nex_lab/screens/auth_screens/screen_router.dart';
 
@@ -44,11 +45,10 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade900,
+        backgroundColor: darkBlue,
         title: const Text(
           'About Us',
           style: TextStyle(
-            fontFamily: 'Raleway',
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -173,7 +173,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                       borderRadius: BorderRadius.circular(8.0),
                       side: BorderSide(color: Colors.blue.shade100),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     textStyle: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -200,7 +201,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
         children: [
           Expanded(
             child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(15)),
               child: Image.asset(
                 assetPath,
                 fit: BoxFit.cover,

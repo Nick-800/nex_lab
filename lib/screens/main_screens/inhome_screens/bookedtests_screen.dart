@@ -7,7 +7,7 @@ import 'package:nex_lab/screens/main_screens/booked_test_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class BookedTestsScreen extends StatefulWidget {
-  const BookedTestsScreen({super.key,  this.testId});
+  const BookedTestsScreen({super.key, this.testId});
   final int? testId;
 
   @override
@@ -15,7 +15,6 @@ class BookedTestsScreen extends StatefulWidget {
 }
 
 class _BookedTestsScreenState extends State<BookedTestsScreen> {
-
   // void deleteBookedTest() {
   //   Provider.of<BookedTestsProvider>(context, listen: false)
   //       .deleteBookedTest(widget.testId)
@@ -39,7 +38,7 @@ class _BookedTestsScreenState extends State<BookedTestsScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if(widget.testId != null){
+      if (widget.testId != null) {
         Provider.of<BookedTestsProvider>(context, listen: false)
             .deleteBookedTest(widget.testId!);
       }
@@ -70,11 +69,15 @@ class _BookedTestsScreenState extends State<BookedTestsScreen> {
               margin: const EdgeInsets.all(8.0),
               child: ListTile(
                 title: Text(bookedTest.testName),
-                subtitle:
-                    Text("Booked for: $bookedTestTime  \n $bookedTestDate   ${bookedTest.testId}"),
+                subtitle: Text(
+                    "Booked for: $bookedTestTime  \n $bookedTestDate   ${bookedTest.testId}"),
                 trailing: const Icon(Icons.arrow_forward),
                 onTap: () {
-                  push(context, BookedTestDetailsScreen(testId: bookedTest.testId, bookedTestId: bookedTest.id));
+                  push(
+                      context,
+                      BookedTestDetailsScreen(
+                          testId: bookedTest.testId,
+                          bookedTestId: bookedTest.id));
                 },
               ),
             );

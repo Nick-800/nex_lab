@@ -12,7 +12,6 @@ class TermsAndConditionsScreen extends StatefulWidget {
 class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
   bool _isAccepted = false;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +41,14 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 20),
               _buildHeader('Terms and Conditions'),
+
               _buildSection(
                 'Introduction',
                 'Welcome to NexLab. By using our app, you agree to comply with and be bound by the following terms and conditions. Please review them carefully.',
               ),
+              const SizedBox(height: 48),
               _buildSection(
                 'Privacy Policy',
                 'Your use of our app is also subject to our Privacy Policy, which explains how we collect, use, and protect your personal information. By using our app, you consent to the collection and use of your information as described in the Privacy Policy.',
@@ -121,7 +123,8 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
             ? () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AboutUsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const AboutUsScreen()),
                 );
               }
             : null,

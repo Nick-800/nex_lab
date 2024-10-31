@@ -41,7 +41,7 @@ class UserModel {
         location: json["location"] ?? '',
         dob: json["DOB"],
         gender: json["gender"],
-        bookedTests: json["booked_tests"] ?? 0,
+        bookedTests: json["booked_tests"] ?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );

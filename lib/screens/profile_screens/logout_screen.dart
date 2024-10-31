@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nex_lab/helpers/functions_helper.dart';
 import 'package:nex_lab/providers/authentication_provider.dart';
 import 'package:nex_lab/screens/auth_screens/screen_router.dart';
+import 'package:nex_lab/widgets/clickables/buttons/cancel_button.dart';
+import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
 import 'package:provider/provider.dart';
 
 class LogoutScreen extends StatefulWidget {
@@ -21,9 +23,11 @@ class _LogoutScreenState extends State<LogoutScreen> {
   }
 
   void _retrieveUser() {
-    final authProvider = Provider.of<AuthenticationProvider>(context, listen: false);
+    final authProvider =
+        Provider.of<AuthenticationProvider>(context, listen: false);
     setState(() {
-      _userName = authProvider.user?.name; // Assuming user has a 'name' property
+      _userName =
+          authProvider.user?.name; // Assuming user has a 'name' property
     });
   }
 
@@ -43,7 +47,8 @@ class _LogoutScreenState extends State<LogoutScreen> {
               if (_userName != null)
                 Text(
                   'Hello, $_userName',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               const SizedBox(height: 20),
               const Text(
@@ -51,26 +56,14 @@ class _LogoutScreenState extends State<LogoutScreen> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
-              Row(  
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
+                  MainButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancel'),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    text: 'Cancel',
                   ),
-                  ElevatedButton(
+                  CancelButton(
                     onPressed: () {
                       Provider.of<AuthenticationProvider>(context,
                               listen: false)
@@ -81,19 +74,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
                         }
                       });
                     },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    child: const Text('Logout'),
+                    text: 'Logout',
                   ),
                 ],
               ),

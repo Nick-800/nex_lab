@@ -1,13 +1,15 @@
 // ignore_for_file: non_constant_identifier_names
 
-
 import 'package:flutter/material.dart';
 import 'package:nex_lab/models/test_model.dart';
 import 'package:nex_lab/providers/booked_tests_provider.dart';
+import 'package:nex_lab/widgets/clickables/buttons/cancel_button.dart';
+import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
 import 'package:provider/provider.dart';
 
 class TestDetailsScreen extends StatefulWidget {
-  const TestDetailsScreen({super.key, required this.tm, required this.bookedDateTime});
+  const TestDetailsScreen(
+      {super.key, required this.tm, required this.bookedDateTime});
 
   final DateTime bookedDateTime;
   final TestModel tm;
@@ -19,21 +21,19 @@ class TestDetailsScreen extends StatefulWidget {
 class _TestDetailsScreenState extends State<TestDetailsScreen> {
   void addBookedTest() {
     Provider.of<BookedTestsProvider>(context, listen: false).addBookedTest({
-      "test_id": "${widget.tm.id}", "booked_time": "${widget.bookedDateTime}"
-    }).then((added){
-      if(added){
+      "test_id": "${widget.tm.id}",
+      "booked_time": "${widget.bookedDateTime}"
+    }).then((added) {
+      if (added) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Test Booked Successfully"),
         ));
-      }else{
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Failed to book test"),
         ));
       }
-    })
-    
-    
-    ;
+    });
   }
 
   @override
@@ -80,7 +80,7 @@ class _TestDetailsScreenState extends State<TestDetailsScreen> {
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
+              MainButton(
                 onPressed: () {
                   showDialog(
                     context: context,
@@ -89,23 +89,29 @@ class _TestDetailsScreenState extends State<TestDetailsScreen> {
                       content: Text(
                           'Are you sure you want to take the ${tm.testName} test?'),
                       actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            addBookedTest();
-                          },
-                          child: const Text('Confirm'),
-                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CancelButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              text: 'Cancel',
+                            ),
+                            MainButton(
+                              onPressed: () {
+                                addBookedTest();
+                                Navigator.of(context).pop();
+                              },
+                              text: 'Confirm',
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   );
                 },
-                child: const Text('Confirm Test'),
+                text: 'Confirm Test',
               ),
             ],
           ),

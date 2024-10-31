@@ -2,15 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:nex_lab/helpers/consts.dart';
-import 'package:nex_lab/helpers/functions_helper.dart';
-import 'package:nex_lab/providers/authentication_provider.dart';
 import 'package:nex_lab/providers/booked_tests_provider.dart';
 import 'package:nex_lab/providers/test_provider.dart';
-import 'package:nex_lab/screens/auth_screens/screen_router.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/bookedtests_screen.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/tests_sceen.dart';
-// import 'package:nex_lab/main_screens/inhome_screens/bookedtests_screen.dart';
-// import 'package:nex_lab/screens/inhome_screens/tests_sceen.dart';
 import 'package:nex_lab/screens/main_screens/result_screen.dart';
 import 'package:nex_lab/screens/profile_screens/profile_screen.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final icons = [Icons.science, Icons.bookmark];
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
         gradient: LinearGradient(
           colors: [Colors.grey[300]!, Colors.grey[400]!],
           begin: Alignment.topLeft,
@@ -63,15 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
                 decoration: BoxDecoration(
-                  color: isSelected ? Colors.blue : Colors.transparent,
-                  border: Border(
-                    bottom: BorderSide(
-                      color: isSelected ? Colors.blue : Colors.transparent,
-                      width: 2,
-                    ),
-                  ),
+                  color: isSelected ? darkBlue : Colors.transparent,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       titles[index],
                       style: TextStyle(
-                        fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
                         color: isSelected ? Colors.white : Colors.black,
                       ),
@@ -102,25 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Provider.of<AuthenticationProvider>(context, listen: false)
-              .logout()
-              .then((loggedOut) {
-            if (loggedOut) {
-              push(context, const ScreenRouter());
-            }
-          });
-        },
-        child: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
-      ),
       appBar: AppBar(
-        backgroundColor: mainColor,
+        backgroundColor: darkBlue,
         title: Image.asset('assets/icons/nexlab_logo.png',
             width: 189, height: 33, fit: BoxFit.contain),
-        actions: [
-          const Icon(Icons.notifications, color: Colors.black, size: 40)
-        ],
         centerTitle: true,
         elevation: 0,
       ),

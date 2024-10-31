@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nex_lab/helpers/consts.dart';
 import 'package:provider/provider.dart';
 import 'package:nex_lab/providers/result_provider.dart';
 import 'package:nex_lab/models/user_result_model.dart';
 
 class ResultScreen extends StatefulWidget {
-  const ResultScreen({super.key,});
+  const ResultScreen({
+    super.key,
+  });
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
@@ -50,7 +51,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
-                    decoration: const BoxDecoration(color: mainColor),
+                    decoration: const BoxDecoration(color: Color(0xFF599BD1)),
                     child: ListTile(
                       title: Text(
                           'Result Name: ${result.filePath.substring(8, 13)}'),

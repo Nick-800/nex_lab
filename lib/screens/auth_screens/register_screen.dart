@@ -49,13 +49,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         "location": locationController.text,
       }).then((loggedIn) {
         if (loggedIn) {
-          printDebug("55555555555555555555555555555555");
           pushAndRemoveUntil(context, const ScreenRouter());
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Registered Successfully"),
           ));
         } else {
-          printDebug("444444444444444444444444444444444444444");
 
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Register Failed"),
@@ -291,7 +289,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                       if (pickedDate != null) {
                                                         String formattedDate =
                                                             DateFormat(
-                                                                    'dd-MM-yyyy')
+                                                                    'yyyy-MM-dd')
                                                                 .format(
                                                                     pickedDate);
                                                         setState(() {
