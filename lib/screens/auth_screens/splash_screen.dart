@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:nex_lab/screens/auth_screens/onbaording_screen.dart';
-import 'package:nex_lab/screens/main_screens/home_screen.dart';
+import 'package:nex_lab/screens/auth_screens/screen_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -28,9 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const NexLabBoardingScreen()));
     } else {
-      // Navigate to the main screen
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
+          MaterialPageRoute(builder: (context) => const ScreenRouter()));
     }
   }
 

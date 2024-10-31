@@ -15,7 +15,6 @@ class ResultScreen extends StatefulWidget {
 class _ResultScreenState extends State<ResultScreen> {
   @override
   void initState() {
-    // Call getResults when the screen is first displayed
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<ResultProvider>(context, listen: false).getResults();
     });

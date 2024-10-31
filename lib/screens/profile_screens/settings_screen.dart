@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nex_lab/screens/profile_screens/change_password_screen.dart';
 import 'package:nex_lab/screens/profile_screens/logout_screen.dart';
-import 'privacy_screen.dart'; // Import PrivacyScreen
+import 'privacy_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

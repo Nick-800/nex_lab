@@ -33,7 +33,7 @@ class Confirm_Payment_Screen extends StatelessWidget {
           children: [
             Center(
               child: Lottie.asset(
-                'Assets/icon/Success (1).json', // Replace with your Lottie animation file
+                'Assets/icon/Success (1).json', 
                 width: 360,
                 height: 150,
               ),
@@ -63,11 +63,10 @@ class Confirm_Payment_Screen extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Perform OTP verification logic here
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Code verified successfully!')),
                   );
-                  Navigator.pop(context); // Go back to the previous screen
+                  Navigator.pop(context); 
                 },
                 child: const Text('Verify Code'),
                 style: ElevatedButton.styleFrom(

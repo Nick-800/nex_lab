@@ -10,7 +10,7 @@ import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
 import 'package:nex_lab/widgets/statics/custom_form_card.dart';
 import 'package:nex_lab/widgets/statics/custom_text_field.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart'; // Add this import for date formatting
+import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class RegisterScreen extends StatefulWidget {

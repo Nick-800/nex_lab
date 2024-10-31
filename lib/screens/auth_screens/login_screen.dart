@@ -9,7 +9,6 @@ import 'package:nex_lab/screens/auth_screens/register_screen.dart';
 import 'package:nex_lab/screens/auth_screens/screen_router.dart';
 import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
 import 'package:nex_lab/widgets/statics/custom_form_card.dart';
-// import 'package:nex_lab/helpers/functions_helper.dart';
 import 'package:nex_lab/widgets/statics/custom_text_field.dart';
 import 'package:provider/provider.dart';
 

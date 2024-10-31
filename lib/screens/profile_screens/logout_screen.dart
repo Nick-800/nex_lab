@@ -27,7 +27,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
         Provider.of<AuthenticationProvider>(context, listen: false);
     setState(() {
       _userName =
-          authProvider.user?.name; // Assuming user has a 'name' property
+          authProvider.user?.name; 
     });
   }
 

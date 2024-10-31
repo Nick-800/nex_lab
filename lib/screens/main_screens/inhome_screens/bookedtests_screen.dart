@@ -15,25 +15,7 @@ class BookedTestsScreen extends StatefulWidget {
 }
 
 class _BookedTestsScreenState extends State<BookedTestsScreen> {
-  // void deleteBookedTest() {
-  //   Provider.of<BookedTestsProvider>(context, listen: false)
-  //       .deleteBookedTest(widget.testId)
-  //       .then((deleted) {
-  //     if (deleted) {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           content: Text('Test Deleted Successfully'),
-  //         ),
-  //       );
-  //     } else {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           content: Text('Failed to delete test'),
-  //         ),
-  //       );
-  //     }
-  //   });
-  // }
+ 
 
   @override
   void initState() {

@@ -76,9 +76,9 @@ class AuthenticationProvider extends BaseProvider {
       var data = jsonDecode(response.body);
       user = UserModel.fromJson(data);
       if (user != null) {
-        printDebug("${user!.toJson()} 999999999999999999999999999999");
+        printDebug("${user!.toJson()}");
       } else {
-        printDebug("User data is null 777777777777777777777777777777");
+        printDebug("User data is null");
       }
       setIsLoading(false); 
       return true;

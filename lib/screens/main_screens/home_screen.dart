@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
           : (_selectedIndex == 0
               ? const ResultScreen()
               : const Center(
-                  child: ProfileScreen())), // Placeholder for Profile screen
+                  child: ProfileScreen())), 
       bottomNavigationBar: BottomNavigationBar(
         fixedColor: Colors.blue,
         unselectedItemColor: Colors.blue,
