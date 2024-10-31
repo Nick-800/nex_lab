@@ -4,13 +4,13 @@ import 'package:nex_lab/screens/profile_screens/logout_screen.dart';
 import 'privacy_screen.dart'; // Import PrivacyScreen
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
         backgroundColor: Colors.blue.shade50,
       ),
       body: Padding(
@@ -19,64 +19,64 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              leading: Icon(Icons.notifications),
-              title: Text('Notifications'),
+              leading: const Icon(Icons.notifications),
+              title: const Text('Notifications'),
               trailing: Switch(value: true, onChanged: (bool value) {}),
             ),
             ListTile(
-              leading: Icon(Icons.lock),
-              title: Text('Change Password'),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.lock),
+              title: const Text('Change Password'),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+                  MaterialPageRoute(builder: (context) => const ChangePasswordScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.language),
-              title: Text('Language'),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.language),
+              title: const Text('Language'),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
               },
             ),
             ListTile(
-              leading: Icon(Icons.privacy_tip),
-              title: Text('Privacy & Terms'),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.privacy_tip),
+              title: const Text('Privacy & Terms'),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PrivacyScreen()),
+                  MaterialPageRoute(builder: (context) => const PrivacyScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.help),
-              title: Text('Help & Support'),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.help),
+              title: const Text('Help & Support'),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
-              trailing: Icon(Icons.arrow_forward),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
               iconColor: Colors.red,
               selectedColor: Colors.red,
               textColor: Colors.red,
-              trailing: Icon(Icons.arrow_forward),
+              trailing: const Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LogoutScreen()),
+                  MaterialPageRoute(builder: (context) => const LogoutScreen()),
                 );
               },
             ),

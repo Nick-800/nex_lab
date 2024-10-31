@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class PrivacyScreen extends StatelessWidget {
-  const PrivacyScreen({Key? key}) : super(key: key);
+  const PrivacyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Privacy & Terms'),
+        title: const Text('Privacy & Terms'),
         backgroundColor: Colors.blue.shade50,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -2,12 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:nex_lab/helpers/consts.dart';
+import 'package:nex_lab/helpers/functions_helper.dart';
+import 'package:nex_lab/providers/authentication_provider.dart';
+import 'package:nex_lab/screens/auth_screens/screen_router.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/bookedtests_screen.dart';
 import 'package:nex_lab/screens/main_screens/inhome_screens/tests_sceen.dart';
 // import 'package:nex_lab/main_screens/inhome_screens/bookedtests_screen.dart';
 // import 'package:nex_lab/screens/inhome_screens/tests_sceen.dart';
 import 'package:nex_lab/screens/main_screens/result_screen.dart';
 import 'package:nex_lab/screens/profile_screens/profile_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -99,6 +103,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          
+                  Provider.of<AuthenticationProvider>(context, listen: false)
+                      .logout()
+                      .then((loggedOut) {
+                    if (loggedOut) {
+                      push(context, const ScreenRouter());
+                    }
+                  });
+                },
+        
+        child: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+      ),
       appBar: AppBar(
         backgroundColor: mainColor,
         title: Image.asset('assets/icons/nexlab_logo.png',

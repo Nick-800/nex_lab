@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AddCardDetailsScreen extends StatelessWidget {
+  const AddCardDetailsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Card Details'),
+        title: const Text('Add Card Details'),
         backgroundColor: Colors.blue.shade50,
       ),
       body: Padding(
@@ -13,35 +15,35 @@ class AddCardDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'Card Number',
                 border: OutlineInputBorder(),
               ),
             ),
            
-            SizedBox(height: 20),
-            TextField(
+            const SizedBox(height: 20),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'PIN',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Card details added successfully!')));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Card details added successfully!')));
                 Navigator.pop(context);
               },
-              child: Text('Add details'),
+              child: const Text('Add details'),
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.blue,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                textStyle: TextStyle(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                textStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),

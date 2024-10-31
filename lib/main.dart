@@ -20,22 +20,18 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthenticationProvider>(
-            create: (_) => AuthenticationProvider()),
+            create: (_) => AuthenticationProvider()..getUser()),
         ChangeNotifierProvider<ResultProvider>(create: (_) => ResultProvider()),
-        ChangeNotifierProvider<TestProvider>(create: (_)=> TestProvider()),
-        ChangeNotifierProvider<BookedTestsProvider>(create: (_) => BookedTestsProvider())
-
+        ChangeNotifierProvider<TestProvider>(create: (_) => TestProvider()),
+        ChangeNotifierProvider<BookedTestsProvider>(
+            create: (_) => BookedTestsProvider())
       ],
       child: MaterialApp(
-        
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           fontFamily: GoogleFonts.cairo().fontFamily,
-         
-         
-
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),

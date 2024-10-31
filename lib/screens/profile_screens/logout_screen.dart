@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:nex_lab/helpers/functions_helper.dart';
+import 'package:nex_lab/providers/authentication_provider.dart';
+import 'package:nex_lab/screens/auth_screens/screen_router.dart';
+import 'package:provider/provider.dart';
 
-class LogoutScreen extends StatelessWidget {
-  const LogoutScreen({Key? key}) : super(key: key);
+class LogoutScreen extends StatefulWidget {
+  const LogoutScreen({super.key});
 
-  void _confirmLogout(BuildContext context) {
-    // Handle logout logic here
-    Navigator.popUntil(context, (route) => route.isFirst); // Navigate back to the initial screen
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Logged out successfully!')));
+  @override
+  _LogoutScreenState createState() => _LogoutScreenState();
+}
+
+class _LogoutScreenState extends State<LogoutScreen> {
+  String? _userName;
+
+  @override
+  void initState() {
+    super.initState();
+    _retrieveUser();
+  }
+
+  void _retrieveUser() {
+    final authProvider = Provider.of<AuthenticationProvider>(context, listen: false);
+    setState(() {
+      _userName = authProvider.user?.name; // Assuming user has a 'name' property
+    });
   }
 
   @override
@@ -22,6 +40,12 @@ class LogoutScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              if (_userName != null)
+                Text(
+                  'Hello, $_userName',
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              const SizedBox(height: 20),
               const Text(
                 'Are you sure you want to log out?',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -47,8 +71,16 @@ class LogoutScreen extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () => _confirmLogout(context),
-                    child: const Text('Logout'),
+                    onPressed: () {
+                      Provider.of<AuthenticationProvider>(context,
+                              listen: false)
+                          .logout()
+                          .then((loggedOut) {
+                        if (loggedOut) {
+                          push(context, const ScreenRouter());
+                        }
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.red,
@@ -61,6 +93,7 @@ class LogoutScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    child: const Text('Logout'),
                   ),
                 ],
               ),

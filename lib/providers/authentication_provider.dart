@@ -67,4 +67,26 @@ class AuthenticationProvider extends BaseProvider {
 
     return true;
   }
+
+  getUser() async {
+    setIsLoading(true); 
+    final response = await api.get("$baseUrl/api/user"); 
+    if (response.statusCode == 200) {
+      setIsFailed(false); 
+      var data = jsonDecode(response.body);
+      user = UserModel.fromJson(data);
+      if (user != null) {
+        printDebug("${user!.toJson()} 999999999999999999999999999999");
+      } else {
+        printDebug("User data is null 777777777777777777777777777777");
+      }
+      setIsLoading(false); 
+      return true;
+    } else {
+      setIsFailed(true);
+      printDebug(response.body);
+      setIsLoading(false); 
+      return false;
+    }
+  }
 }

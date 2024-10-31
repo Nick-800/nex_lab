@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AddPaymentMethodScreen extends StatefulWidget {
   final String method;
 
-  const AddPaymentMethodScreen({required this.method, Key? key}) : super(key: key);
+  const AddPaymentMethodScreen({required this.method, super.key});
 
   @override
   _AddPaymentMethodScreenState createState() => _AddPaymentMethodScreenState();
@@ -47,7 +47,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
         backgroundColor: Colors.blue.shade50,
         title: Text(
           'Add ${widget.method}',
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Raleway',
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -74,7 +74,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                       : widget.method == 'Mobicash'
                           ? Image.asset('Assets/mobi2.png')
                           : widget.method == 'Cash'
-                              ? Icon(
+                              ? const Icon(
                                   FontAwesomeIcons.moneyBill1Wave,
                                   size: 100,
                                   color: Colors.green,
@@ -86,14 +86,14 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                                   fit: BoxFit.cover,
                                 ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 if (widget.method == 'Visa Card') ...[
                   _buildTextField(
                       label: 'Card Number',
                       hint: '1234 5678 9012 3456',
                       icon: Icons.credit_card,
                       controller: _cardNumberController),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
@@ -102,7 +102,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                               hint: 'MM/YY',
                               icon: Icons.calendar_today,
                               controller: _expiryDateController)),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                           child: _buildTextField(
                               label: 'CVV',
@@ -127,8 +127,8 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                 ] else if (widget.method == 'Cash') ...[
                   Row(
                     children: [
-                      Icon(FontAwesomeIcons.moneyBill1Wave, size: 40, color: Colors.green),
-                      SizedBox(width: 10),
+                      const Icon(FontAwesomeIcons.moneyBill1Wave, size: 40, color: Colors.green),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Text(
                           'Please provide cash at the front desk.',
@@ -138,7 +138,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                     ],
                   ),
                 ],
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Center(
                   child: ElevatedButton(
                     onPressed: () async {
@@ -163,8 +163,8 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      textStyle: TextStyle(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      textStyle: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -212,7 +212,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         prefixIcon: Icon(icon, color: Colors.blue.shade900),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.blue.shade900),

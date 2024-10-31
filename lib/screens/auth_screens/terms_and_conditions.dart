@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nex_lab/screens/profile_screens/about_screen.dart';
 
 class TermsAndConditionsScreen extends StatefulWidget {
+  const TermsAndConditionsScreen({super.key});
+
   @override
   _TermsAndConditionsScreenState createState() =>
       _TermsAndConditionsScreenState();
@@ -10,11 +12,6 @@ class TermsAndConditionsScreen extends StatefulWidget {
 class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
   bool _isAccepted = false;
 
-  void _acceptTerms() {
-    setState(() {
-      _isAccepted = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

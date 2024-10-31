@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen({Key? key}) : super(key: key);
+  const ChangePasswordScreen({super.key});
 
   @override
   _ChangePasswordScreenState createState() => _ChangePasswordScreenState();

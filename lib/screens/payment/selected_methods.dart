@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectPaymentMethodScreen extends StatefulWidget {
+  const SelectPaymentMethodScreen({super.key});
+
   @override
   _SelectPaymentMethodScreenState createState() => _SelectPaymentMethodScreenState();
 }
@@ -28,7 +30,7 @@ class _SelectPaymentMethodScreenState extends State<SelectPaymentMethodScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade900,
-        title: Text(
+        title: const Text(
           'Select Payment Method',
           style: TextStyle(
             fontFamily: 'Raleway',

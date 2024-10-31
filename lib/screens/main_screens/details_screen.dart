@@ -1,9 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/models/test_model.dart';
 import 'package:nex_lab/providers/booked_tests_provider.dart';
 import 'package:provider/provider.dart';

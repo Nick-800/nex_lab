@@ -4,6 +4,8 @@ import 'package:nex_lab/screens/auth_screens/terms_and_conditions.dart';
 import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
 
 class NexLabBoardingScreen extends StatefulWidget {
+  const NexLabBoardingScreen({super.key});
+
   @override
   _NexLabBoardingScreenState createState() => _NexLabBoardingScreenState();
 }
@@ -140,7 +142,7 @@ class _NexLabBoardingScreenState extends State<NexLabBoardingScreen>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TermsAndConditionsScreen()),
+                            builder: (context) => const TermsAndConditionsScreen()),
                       );
                     },
                     text: 'Continue',

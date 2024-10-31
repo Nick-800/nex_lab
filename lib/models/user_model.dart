@@ -13,10 +13,10 @@ class UserModel {
   String name;
   String email;
   String phone;
-  String? location;
-  DateTime? dob;
+  String location;
+  String dob;
   String gender;
-  int? bookedTests;
+  String bookedTests;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -25,10 +25,10 @@ class UserModel {
     required this.name,
     required this.email,
     required this.phone,
-    this.location,
-    this.dob,
+    required this.location,
+    required this.dob,
     required this.gender,
-    this.bookedTests,
+    required this.bookedTests,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -38,10 +38,10 @@ class UserModel {
         name: json["name"],
         email: json["email"],
         phone: json["phone"],
-        location: json["location"],
-        dob: DateTime.parse(json["DOB"]),
+        location: json["location"] ?? '',
+        dob: json["DOB"],
         gender: json["gender"],
-        bookedTests: json["booked_tests"],
+        bookedTests: json["booked_tests"] ?? 0,
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -52,8 +52,8 @@ class UserModel {
         "email": email,
         "phone": phone,
         "location": location,
-        "DOB":
-            "${dob?.year.toString().padLeft(4, '0')}-${dob?.month.toString().padLeft(2, '0')}-${dob?.day.toString().padLeft(2, '0')}",
+        "DOB": dob,
+        // "${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}-${dob.year.toString().padLeft(4, '0')}-",
         "gender": gender,
         "booked_tests": bookedTests,
         "created_at": createdAt.toIso8601String(),

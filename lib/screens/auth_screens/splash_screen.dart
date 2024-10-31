@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/screens/auth_screens/onbaording_screen.dart';
-import 'package:nex_lab/screens/auth_screens/screen_router.dart';
-// import 'package:nex_lab/screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(animationDuration, () {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) =>   NexLabBoardingScreen()));
+          MaterialPageRoute(builder: (context) =>   const NexLabBoardingScreen()));
     });
     super.initState();
   }
