@@ -1,21 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:nex_lab/helpers/functions_helper.dart';
 import 'package:nex_lab/models/booked_tests_model.dart';
 import 'package:nex_lab/providers/booked_tests_provider.dart';
 import 'package:nex_lab/providers/test_provider.dart';
+import 'package:nex_lab/screens/main_screens/booked_test_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class BookedTestsScreen extends StatefulWidget {
-  const BookedTestsScreen({super.key});
+  const BookedTestsScreen({super.key,  this.testId});
+  final int? testId;
 
   @override
   _BookedTestsScreenState createState() => _BookedTestsScreenState();
 }
 
 class _BookedTestsScreenState extends State<BookedTestsScreen> {
+
+  // void deleteBookedTest() {
+  //   Provider.of<BookedTestsProvider>(context, listen: false)
+  //       .deleteBookedTest(widget.testId)
+  //       .then((deleted) {
+  //     if (deleted) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(
+  //           content: Text('Test Deleted Successfully'),
+  //         ),
+  //       );
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(
+  //           content: Text('Failed to delete test'),
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
+
   @override
   void initState() {
-    // Call getResults when the screen is first displayed
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if(widget.testId != null){
+        Provider.of<BookedTestsProvider>(context, listen: false)
+            .deleteBookedTest(widget.testId!);
+      }
       Provider.of<BookedTestsProvider>(context, listen: false).getBookedTests();
     });
     super.initState();
@@ -44,17 +71,10 @@ class _BookedTestsScreenState extends State<BookedTestsScreen> {
               child: ListTile(
                 title: Text(bookedTest.testName),
                 subtitle:
-                    Text("Booked for: $bookedTestTime  \n $bookedTestDate"),
+                    Text("Booked for: $bookedTestTime  \n $bookedTestDate   ${bookedTest.testId}"),
                 trailing: const Icon(Icons.arrow_forward),
                 onTap: () {
-                  // Handle tap on the booked test item
-                  // You can navigate to a details screen or show more information
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => TestDetailsScreen(tm: bookedTest),
-                  //   ),
-                  // );
+                  push(context, BookedTestDetailsScreen(testId: bookedTest.testId, bookedTestId: bookedTest.id));
                 },
               ),
             );

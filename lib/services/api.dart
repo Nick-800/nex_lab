@@ -108,4 +108,22 @@ class Api {
 
     return response;
   }
+
+  Future<Response> delete(String url) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var token = pref.getString("token");
+    final response = await http.delete(Uri.parse(url), headers: {
+      "Accept": "application/json",
+      "Authorization": "Bearer $token",
+    });
+
+    if (response.statusCode == 401) {
+      refreshToken().then((refreshed) {
+        if (refreshed) {
+          delete(url);
+        }
+      });
+    }
+    return response;
+  }
 }

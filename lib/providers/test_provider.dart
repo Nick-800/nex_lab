@@ -70,7 +70,7 @@ class TestProvider extends BaseProvider {
   Future<void> getTestById(int id) async {
     setIsLoading(true);
     try {
-      var response = await api.get("$baseUrl/api/tests/$id");
+      var response = await api.get("$baseUrl/api/test/$id");
 
       if (response.statusCode == 200) {
         setIsFailed(false);

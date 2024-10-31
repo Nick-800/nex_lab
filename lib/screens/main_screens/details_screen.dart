@@ -7,7 +7,9 @@ import 'package:nex_lab/providers/booked_tests_provider.dart';
 import 'package:provider/provider.dart';
 
 class TestDetailsScreen extends StatefulWidget {
-  const TestDetailsScreen({super.key, required this.tm});
+  const TestDetailsScreen({super.key, required this.tm, required this.bookedDateTime});
+
+  final DateTime bookedDateTime;
   final TestModel tm;
 
   @override
@@ -17,7 +19,7 @@ class TestDetailsScreen extends StatefulWidget {
 class _TestDetailsScreenState extends State<TestDetailsScreen> {
   void addBookedTest() {
     Provider.of<BookedTestsProvider>(context, listen: false).addBookedTest({
-      "test_id": "${widget.tm.id}", "booked_time": "2024-10-30 09:55:08"
+      "test_id": "${widget.tm.id}", "booked_time": "${widget.bookedDateTime}"
     }).then((added){
       if(added){
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

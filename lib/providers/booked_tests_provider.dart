@@ -43,6 +43,21 @@ class BookedTestsProvider extends BaseProvider{
     }
   }
 
+  Future<bool> deleteBookedTest(int testId) async {
+    setIsLoading(true);
+    final response = await api.delete("$baseUrl/api/user/test/delete/$testId");
+
+    if (response.statusCode == 200) {
+      setIsFailed(false);
+      return true;
+    } else {
+      setIsFailed(true);
+      printDebug(response.body);
+      setIsLoading(false);
+      return false;
+    }
+  }
+
 
 
 
