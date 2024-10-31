@@ -28,6 +28,21 @@ class BookedTestsProvider extends BaseProvider{
 
   }
 
+  Future<bool> addBookedTest(Map body) async {
+    setIsLoading(true);
+    final response = await api.post("$baseUrl/api/user/test/add", body);
+
+    if (response.statusCode == 200) {
+      setIsFailed(false);
+      return true;
+    } else {
+      setIsFailed(true);
+      printDebug(response.body);
+      setIsLoading(false);
+      return false;
+    }
+  }
+
 
 
 

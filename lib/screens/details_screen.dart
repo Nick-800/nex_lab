@@ -1,17 +1,47 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter/material.dart';
-import 'package:nex_lab/models/test_model.dart';
+import 'dart:convert';
 
-class TestDetailsScreen extends StatelessWidget {
-  final TestModel tm;
+import 'package:flutter/material.dart';
+import 'package:nex_lab/helpers/consts.dart';
+import 'package:nex_lab/models/test_model.dart';
+import 'package:nex_lab/providers/booked_tests_provider.dart';
+import 'package:provider/provider.dart';
+
+class TestDetailsScreen extends StatefulWidget {
   const TestDetailsScreen({super.key, required this.tm});
+  final TestModel tm;
+
+  @override
+  _TestDetailsScreenState createState() => _TestDetailsScreenState();
+}
+
+class _TestDetailsScreenState extends State<TestDetailsScreen> {
+  void addBookedTest() {
+    Provider.of<BookedTestsProvider>(context, listen: false).addBookedTest({
+      "test_id": "${widget.tm.id}", "booked_time": "2024-10-30 09:55:08"
+    }).then((added){
+      if(added){
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Test Booked Successfully"),
+        ));
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Failed to book test"),
+        ));
+      }
+    })
+    
+    
+    ;
+  }
 
   @override
   Widget build(BuildContext context) {
+    var tm = widget.tm;
     return Scaffold(
       appBar: AppBar(
-        title: Text(tm.testName),
+        title: Text(widget.tm.testName),
         backgroundColor: Colors.blue.shade50,
       ),
       body: Padding(
@@ -34,8 +64,9 @@ class TestDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Details for ${tm.testName}',
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                'Details for ${widget.tm.testName}',
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
               const Text(
@@ -55,7 +86,8 @@ class TestDetailsScreen extends StatelessWidget {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Confirmation'),
-                      content: Text('Are you sure you want to take the ${tm.testName} test?'),
+                      content: Text(
+                          'Are you sure you want to take the ${tm.testName} test?'),
                       actions: [
                         TextButton(
                           onPressed: () {
@@ -65,10 +97,7 @@ class TestDetailsScreen extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('You have confirmed to take the ${tm.testName} test.')),
-                            );
+                            addBookedTest();
                           },
                           child: const Text('Confirm'),
                         ),

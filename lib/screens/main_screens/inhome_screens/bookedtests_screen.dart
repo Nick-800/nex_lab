@@ -12,7 +12,6 @@ class BookedTestsScreen extends StatefulWidget {
 }
 
 class _BookedTestsScreenState extends State<BookedTestsScreen> {
-
   @override
   void initState() {
     // Call getResults when the screen is first displayed
@@ -35,12 +34,17 @@ class _BookedTestsScreenState extends State<BookedTestsScreen> {
           itemCount: btc.bookedTests.length,
           itemBuilder: (context, index) {
             BookedTestModel bookedTest = btc.bookedTests[index];
+            String bookedTestDate =
+                bookedTest.bookedTime.toString().substring(0, 10);
+            String bookedTestTime =
+                bookedTest.bookedTime.toString().substring(11, 16);
             return Card(
               color: Colors.blue.shade50,
               margin: const EdgeInsets.all(8.0),
               child: ListTile(
-                title: Text(bookedTest.testId.toString()),
-                subtitle: const Text("Booked test negro"),
+                title: Text(bookedTest.testName),
+                subtitle:
+                    Text("Booked for: $bookedTestTime  \n $bookedTestDate"),
                 trailing: const Icon(Icons.arrow_forward),
                 onTap: () {
                   // Handle tap on the booked test item
