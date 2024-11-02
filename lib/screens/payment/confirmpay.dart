@@ -19,7 +19,6 @@ class Confirm_Payment_Screen extends StatelessWidget {
         title: const Text(
           'Payment Verification',
           style: TextStyle(
-            fontFamily: 'Raleway',
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),

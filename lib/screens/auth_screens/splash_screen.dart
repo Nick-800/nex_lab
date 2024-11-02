@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nex_lab/screens/auth_screens/onbaording_screen.dart';
+import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/screens/auth_screens/screen_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,23 +13,12 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
+    void initState() {
+    Timer(animationDuration, () {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const OnBoardRouter()));
+    });
     super.initState();
-    _checkFirstLaunch();
-  }
-
-  Future<void> _checkFirstLaunch() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-
-    if (isFirstLaunch) {
-      await prefs.setBool('isFirstLaunch', false);
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const NexLabBoardingScreen()));
-    } else {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const ScreenRouter()));
-    }
   }
 
   @override
@@ -47,3 +35,5 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
+

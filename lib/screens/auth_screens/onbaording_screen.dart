@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nex_lab/helpers/consts.dart';
 
 import 'package:nex_lab/screens/auth_screens/terms_and_conditions.dart';
 import 'package:nex_lab/widgets/clickables/buttons/main_button.dart';
@@ -54,25 +55,40 @@ class _NexLabBoardingScreenState extends State<NexLabBoardingScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade100,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(color: mainColor),
+        ),
         title: const Text(
           'Welcome to NexLab',
           style: TextStyle(
-            fontFamily: 'Raleway',
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
+            fontSize: 22,
+            letterSpacing: 1.2,
+            shadows: [
+              Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 3.0,
+                color: Colors.black54,
+              ),
+            ],
           ),
         ),
         centerTitle: true,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue.shade100, Colors.blue.shade900],
-            begin: Alignment.bottomRight,
-            end: Alignment.topLeft,
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(4.0),
+          child: Container(
+            color: Colors.white,
+            height: 4.0,
           ),
         ),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/themes/on_boarding_theme.png"),
+                fit: BoxFit.fill)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -84,7 +100,14 @@ class _NexLabBoardingScreenState extends State<NexLabBoardingScreen>
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.black87,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 2.0,
+                        color: Colors.black54,
+                      ),
+                    ]),
               ),
               const SizedBox(height: 20),
               Expanded(
@@ -138,11 +161,15 @@ class _NexLabBoardingScreenState extends State<NexLabBoardingScreen>
                 opacity: _fadeAnimation,
                 child: Center(
                   child: MainButton(
+                    btnColor: darkBlue,
+                    txtColor: Colors.white,
+                    borderColor: darkBlue,
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const TermsAndConditionsScreen()),
+                            builder: (context) =>
+                                const TermsAndConditionsScreen()),
                       );
                     },
                     text: 'Continue',

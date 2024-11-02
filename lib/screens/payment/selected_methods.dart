@@ -33,7 +33,6 @@ class _SelectPaymentMethodScreenState extends State<SelectPaymentMethodScreen> {
         title: const Text(
           'Select Payment Method',
           style: TextStyle(
-            fontFamily: 'Raleway',
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/screens/profile_screens/about_screen.dart';
 
 class TermsAndConditionsScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade900,
+        backgroundColor: darkBlue,
         title: const Text(
           'Terms and Conditions',
           style: TextStyle(
@@ -29,12 +30,10 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue.shade100, Colors.blue.shade900],
-            begin: Alignment.bottomRight,
-            end: Alignment.topLeft,
-          ),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/themes/on_boarding_theme2.png'),
+              fit: BoxFit.cover),
         ),
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),

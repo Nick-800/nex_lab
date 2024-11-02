@@ -8,12 +8,14 @@ class MainButton extends StatelessWidget {
       required this.onPressed,
       this.inProgress = false,
       this.btnColor = mainColor,
-      this.txtColor = Colors.white});
+      this.txtColor = Colors.white,
+      this.borderColor = mainColor});
   final String text;
   final Function onPressed;
   final bool inProgress;
   final Color btnColor;
   final Color txtColor;
+  final Color borderColor;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,13 +23,13 @@ class MainButton extends StatelessWidget {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            side: const BorderSide(color: mainColor, width: 2),
+            side: BorderSide(color: borderColor, width: 2),
             backgroundColor: btnColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18),
             ),
           ),
-          onPressed: ()=> onPressed(),
+          onPressed: () => onPressed(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: Row(

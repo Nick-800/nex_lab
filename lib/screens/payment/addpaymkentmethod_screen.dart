@@ -48,7 +48,6 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
         title: Text(
           'Add ${widget.method}',
           style: const TextStyle(
-            fontFamily: 'Raleway',
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
