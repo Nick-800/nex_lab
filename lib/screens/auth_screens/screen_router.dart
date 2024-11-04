@@ -70,7 +70,10 @@ class _OnBoardRouterState extends State<OnBoardRouter> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          color: darkBlue,
+          strokeWidth: 5,
+        ),
       ),
     );
   }

@@ -39,9 +39,32 @@ class _TestsScreenState extends State<TestsScreen> {
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: testConsumer.isLoading
-                ? const Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator(
+                    color: darkBlue,
+                    strokeWidth: 5,
+                  ))
                 : testConsumer.isFailed
-                    ? const Center(child: Text('Failed to load tests'))
+                    ? const Center(
+                        child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.fileCircleExclamation,
+                            size: 90,
+                            color: greyColor,
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            "Failed to load tests",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: greyColor),
+                          )
+                        ],
+                      ))
                     : testConsumer.tests.isEmpty
                         ? const Center(child: Text('No tests found'))
                         : GridView.builder(

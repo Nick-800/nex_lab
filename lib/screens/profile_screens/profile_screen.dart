@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nex_lab/helpers/consts.dart';
 import 'package:nex_lab/helpers/functions_helper.dart';
 import 'package:nex_lab/providers/authentication_provider.dart';
 import 'package:nex_lab/screens/profile_screens/about_screen.dart';
@@ -29,7 +30,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Consumer<AuthenticationProvider>(
         builder: (context, authProvider, child) {
       if (authProvider.isLoading) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator(
+              color: darkBlue,
+              strokeWidth: 5,
+            ));
       }
       if (authProvider.isFailed) {
         return const Center(child: Text('Failed to load user data'));

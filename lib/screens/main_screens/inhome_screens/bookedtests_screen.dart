@@ -38,7 +38,62 @@ class _BookedTestsScreenState extends State<BookedTestsScreen> {
           title: const Text(' Booked Tests'),
           backgroundColor: Colors.blue.shade100,
         ),
-        body: ListView.builder(
+        body: 
+        btc.isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                  strokeWidth: 5,
+                ),
+              )
+            : btc.isFailed
+                ? const Center(
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.error,
+                        size: 90,
+                        color: Colors.red,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        "Failed to load tests",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ))
+                : btc.bookedTests.isEmpty
+                    ? const Center(
+                        child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.error,
+                            size: 90,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            "No tests booked",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ))
+                    :
+
+        
+        ListView.builder(
           itemCount: btc.bookedTests.length,
           itemBuilder: (context, index) {
             BookedTestModel bookedTest = btc.bookedTests[index];

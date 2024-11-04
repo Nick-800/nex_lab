@@ -380,7 +380,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const SizedBox(height: 20),
                       isLoading
-                          ? const CircularProgressIndicator()
+                          ? const CircularProgressIndicator(
+                              color: darkBlue,
+                              strokeWidth: 5,
+                            )
                           : MainButton(
                               text: "Register",
                               onPressed: () => register(formKey)),

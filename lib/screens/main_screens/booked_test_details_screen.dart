@@ -48,7 +48,10 @@ class _BookedTestDetailsScreenState extends State<BookedTestDetailsScreen> {
     return Consumer<TestProvider>(builder: (context, tc, child) {
       if (tc.testById == null) {
         return const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            color: darkBlue,
+            strokeWidth: 5,
+          ),
         );
       }
       TestModel test = tc.testById!;

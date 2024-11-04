@@ -113,7 +113,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 20),
                       isLoading
-                          ? const CircularProgressIndicator()
+                          ? const CircularProgressIndicator(
+                              color: darkBlue,
+                              strokeWidth: 5,
+                            )
                           : MainButton(
                               text: "Login",
                               onPressed: () => login(formKey),

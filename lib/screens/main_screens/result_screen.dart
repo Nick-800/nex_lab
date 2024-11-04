@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nex_lab/helpers/consts.dart';
 import 'package:provider/provider.dart';
 import 'package:nex_lab/providers/result_provider.dart';
 import 'package:nex_lab/models/user_result_model.dart';
@@ -32,15 +34,59 @@ class _ResultScreenState extends State<ResultScreen> {
       body: Consumer<ResultProvider>(
         builder: (context, resultProvider, child) {
           if (resultProvider.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(
+              color: darkBlue,
+              strokeWidth: 5,
+            ));
           }
 
           if (resultProvider.isFailed) {
-            return const Center(child: Text('Failed to load results'));
+            return const Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.fileCircleExclamation,
+                  size: 90,
+                  color: greyColor,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  "Failed to load tests",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: greyColor),
+                )
+              ],
+            ));
           }
 
           if (resultProvider.results.isEmpty) {
-            return const Center(child: Text('No results found'));
+            return const Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.fileCircleExclamation,
+                  size: 90,
+                  color: greyColor,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  "No Results Found",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: greyColor),
+                )
+              ],
+            ));
           }
 
           return ListView.builder(
