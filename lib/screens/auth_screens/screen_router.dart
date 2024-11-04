@@ -62,7 +62,7 @@ class _OnBoardRouterState extends State<OnBoardRouter> {
               builder: (context) => const NexLabBoardingScreen()));
     } else {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const NexLabBoardingScreen()));
+          MaterialPageRoute(builder: (context) => const ScreenRouter()));
     }
   }
 

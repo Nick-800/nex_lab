@@ -4,9 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 TestModel testModelFromJson(String str) => TestModel.fromJson(json.decode(str));
 
 String testModelToJson(TestModel data) => json.encode(data.toJson());
@@ -45,13 +42,7 @@ class TestModel {
     required this.createdAt,
     required this.updatedAt,
   });
-  List<IconData> icons = [FontAwesomeIcons.heart,
-  FontAwesomeIcons.heartPulse,
-  FontAwesomeIcons.leaf,
-  FontAwesomeIcons.lungs,
-  FontAwesomeIcons.brain,
-  FontAwesomeIcons.virusCovid,
-  ];
+  
   factory TestModel.fromJson(Map<String, dynamic> json) => TestModel(
         id: json["id"],
         testName: json["test_name"],

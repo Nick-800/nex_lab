@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:nex_lab/models/user_model.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  const EditProfileScreen({super.key, required this.user});
+  final UserModel? user;
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final TextEditingController _nameController =
-      TextEditingController(text: 'Monther');
-  final TextEditingController _emailController =
-      TextEditingController(text: 'monther69@example.com');
-  final TextEditingController _heightController =
-      TextEditingController(text: '180 cm');
-  final TextEditingController _weightController =
-      TextEditingController(text: '75 kg');
-  final TextEditingController _bloodTypeController =
-      TextEditingController(text: 'O+');
+  late final TextEditingController _nameController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _heightController;
+  late final TextEditingController _weightController;
+  late final TextEditingController _bloodTypeController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.user?.name);
+    _emailController = TextEditingController(text: widget.user?.email);
+    _heightController = TextEditingController(text: '180 cm');
+    _weightController = TextEditingController(text: '75 kg');
+    _bloodTypeController = TextEditingController(text: 'O+');
+  }
 
   bool _showHealthDetails = false;
 
@@ -34,22 +41,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Stack(
-                  children: [
-                    const CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage('assets/profile.jpg'),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: IconButton(
-                        icon: const Icon(Icons.camera_alt),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
+              const Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/profile.png'),
                 ),
               ),
               const SizedBox(height: 20),

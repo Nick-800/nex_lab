@@ -7,6 +7,7 @@ import 'package:nex_lab/providers/base_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
+import 'package:dio/dio.dart';
 
 class ResultProvider extends BaseProvider {
   List<UserResultModel> results = [];
@@ -29,7 +30,7 @@ class ResultProvider extends BaseProvider {
     setIsLoading(false);
   }
 
-  Future<void> fetchPdfReport(int resultId) async {
+  Future<void> fetchAndSavePdfReport(int resultId) async {
     setIsLoading(true);
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
@@ -37,21 +38,23 @@ class ResultProvider extends BaseProvider {
       if (token != null) {
         UserResultModel? result = results.firstWhere((r) => r.id == resultId);
 
-        final response =
-            await api.get("$baseUrl/api/user/result/download/$resultId");
-        printDebug("Fetched file from:  =======  $baseUrl/${result.filePath}");
+        final directory = await getApplicationDocumentsDirectory();
+        final filePath = '${directory.path}/report_${result.filePath.substring(8)}.pdf';
+        final file = File(filePath);
 
-        if (response.statusCode == 200) {
-          final bytes = response.bodyBytes;
-          final path = (await getExternalStorageDirectory())!.path;
-          final fileName = result.filePath.substring(8);
-          final file = File('$path/report_$fileName.pdf');
-          await file.writeAsBytes(bytes, flush: true);
-          OpenFile.open('$path/report_$fileName.pdf');
-          setIsFailed(false);
-        } else {
-          setIsFailed(true);
+        if (!await file.exists()) {
+          final response = await Dio().get(
+            '$baseUrl/api/user/result/download/$resultId',
+            options: Options(
+              headers: {'Authorization': 'Bearer $token'},
+              responseType: ResponseType.bytes,
+            ),
+          );
+          await file.writeAsBytes(response.data);
         }
+
+        await OpenFile.open(filePath);
+        setIsFailed(false);
       } else {
         setIsFailed(true);
       }

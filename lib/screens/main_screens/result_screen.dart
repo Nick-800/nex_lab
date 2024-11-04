@@ -27,6 +27,8 @@ class _ResultScreenState extends State<ResultScreen> {
       appBar: AppBar(
         title: const Text('Results'),
       ),
+      backgroundColor:
+          Colors.grey[300], // Add this line to change the scaffold color
       body: Consumer<ResultProvider>(
         builder: (context, resultProvider, child) {
           if (resultProvider.isLoading) {
@@ -47,21 +49,37 @@ class _ResultScreenState extends State<ResultScreen> {
               UserResultModel result = resultProvider.results[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Container(
-                    decoration: const BoxDecoration(color: Color(0xFF599BD1)),
-                    child: ListTile(
-                      title: Text(
-                          'Result Name: ${result.filePath.substring(8, 13)}'),
-                      subtitle: Text(
-                          'Date: ${result.filePath.substring(14, 24)} \nTime: ${result.filePath.substring(25, 33).replaceAll(r'-', r':')}'),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.picture_as_pdf),
-                        onPressed: () async {
-                          await resultProvider.fetchPdfReport(result.id);
-                        },
-                      ),
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(10),
+                    leading: const Icon(
+                      Icons
+                          .insert_drive_file, // Change this to a more convenient icon
+                      color: Colors.blueAccent,
+                      size: 40,
+                    ),
+                    title: Text(
+                      'Result Name: ${result.filePath.substring(8, 13)}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Date: ${result.filePath.substring(14, 24)}'),
+                        Text(
+                            'Time: ${result.filePath.substring(25, 33).replaceAll(r'-', r':')}'),
+                      ],
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.picture_as_pdf,
+                          color: Colors.redAccent),
+                      onPressed: () async {
+                        await resultProvider.fetchAndSavePdfReport(result.id);
+                      },
                     ),
                   ),
                 ),

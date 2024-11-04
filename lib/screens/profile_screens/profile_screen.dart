@@ -104,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const EditProfileScreen()),
+                            builder: (context) =>  EditProfileScreen(user: authProvider.user! ,)),
                       );
                     },
                   ),
@@ -121,6 +121,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Settings',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                    collapsedBackgroundColor: Colors.transparent, 
+                    backgroundColor: Colors.transparent, 
+                    collapsedShape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide.none, // Add this line
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide.none, // Add this line
                     ),
                     children: [
                       ListTile(
@@ -154,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         title: const Text('Help & Support'),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {
-                          // Navigate to Help & Support Screen
+                         
                         },
                       ),
                       ListTile(
@@ -182,7 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             MaterialPageRoute(
                                 builder: (context) => const LogoutScreen()),
                           );
-                          // Handle Logout
+                         
                         },
                       ),
                     ],
@@ -201,9 +211,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                     ),
+                    collapsedBackgroundColor: Colors.transparent, 
+                    backgroundColor: Colors.transparent, 
+                    collapsedShape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide.none, // Add this line
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide.none, // Add this line
+                    ),
                     children: [
                       SizedBox(
-                        height: 200, // Adjust height as needed
+                        height: 200, 
                         child: PageView(
                           children: [
                             _buildPaymentCard(
