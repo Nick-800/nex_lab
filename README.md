@@ -9,7 +9,7 @@ Nex Lab is a Flutter project designed to book and manage lab test results, makin
 - **Responsive UI**: Adaptive user interface that works seamlessly on both Android and iOS devices.
 - **Lab Test Booking**: Users can schedule lab tests at their convenience.
 - **Result Management**: Users can view and manage their lab test results.
-- **Notifications**: Users receive notifications for upcoming tests and when results are available.
+
 
 ## APIs Used
 
@@ -42,9 +42,8 @@ in your terminal. Then, navigate to the project directory
 
 For any inquiries or support, please contact us at:
 
-- **Sohaib Kamash**:
--                   **Email**: sohaibkmsh@gmail.com
--                   **Phone**: +218927441569
-- **Daniyal Ahmed**:
--                    **Email**: daah12909@gmail.com
--                    **Phone**: +218924723739
+- **Email**: sohaibkmsh@gmail.com
+- **Phone**: +218927441569
+
+## Notes
+The app's backend is hosted on a local computer through a public domain, meaning whenever the computer is turned off or doesn't have access to the internet, the app is rather useless, so if you like to give the app a try and test it, please contact me first so I make sure to set things up properly for the app to function.
