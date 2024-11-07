@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  bool isVisible = false;
 
   void login(formkey) {
     if (formkey.currentState!.validate()) {
@@ -82,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Divider(),
                       const SizedBox(height: 48),
                       CustomTextField(
-                        icon: const Icon(Icons.email),
+                        leadIcon: const Icon(Icons.email),
                         label: "Email",
                         textEditingController: emailController,
                         validate: (value) {
@@ -97,8 +98,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 20),
                       CustomTextField(
-                        icon: const Icon(Icons.lock),
-                        secureText: true,
+                        leadIcon: const Icon(Icons.lock),
+                        onTrailingIconPressed: () {
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        trailingIcon: isVisible
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off),
+                        secureText: !isVisible,
                         label: "Password",
                         textEditingController: passwordController,
                         validate: (value) {

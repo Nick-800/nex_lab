@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nex_lab/helpers/consts.dart';
 
+// ignore: must_be_immutable
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
-    this.icon,
+    this.leadIcon,
+    this.trailingIcon,
+    this.onTrailingIconPressed,
     super.key,
     required this.label,
     this.hint,
@@ -18,7 +21,9 @@ class CustomTextField extends StatefulWidget {
 
   final String? label;
   final String? hint;
-  final Icon? icon;
+  final Icon? leadIcon;
+  final Icon? trailingIcon;
+  final Function()? onTrailingIconPressed;
   final TextEditingController textEditingController;
   final FormFieldValidator<String?> validate;
   final bool secureText;
@@ -56,16 +61,25 @@ class _CustomTextFieldState extends State<CustomTextField> {
           controller: widget.textEditingController,
           validator: widget.validate,
           enabled: widget.isEnabled,
-           keyboardType: widget.keyboardType,
+          keyboardType: widget.keyboardType,
           inputFormatters: widget.inputFormatters,
           decoration: InputDecoration(
+              suffixIcon: widget.trailingIcon != null
+                  ? IconButton(
+                      onPressed: () {
+                        if (widget.onTrailingIconPressed != null) {
+                          widget.onTrailingIconPressed!();
+                        }
+                      },
+                      icon: widget.trailingIcon ?? const SizedBox())
+                  : null,
               prefixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(
                     width: 8,
                   ),
-                  widget.icon ?? const SizedBox(),
+                  widget.leadIcon ?? const SizedBox(),
                   Container(
                     height: 24,
                     width: 1,

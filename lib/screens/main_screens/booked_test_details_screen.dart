@@ -65,7 +65,7 @@ class _BookedTestDetailsScreenState extends State<BookedTestDetailsScreen> {
           child: Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: secondColor,
+              color: Colors.blue.shade50,
               borderRadius: BorderRadius.circular(8.0),
               boxShadow: [
                 BoxShadow(

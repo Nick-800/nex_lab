@@ -34,6 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  bool isVisible = false;
   String? selectedGender;
   final List<String> genderOptions = ['Male', 'Female'];
 
@@ -54,7 +55,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             content: Text("Registered Successfully"),
           ));
         } else {
-
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Register Failed"),
           ));
@@ -121,8 +121,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     children: [
                                                       Expanded(
                                                         child: CustomTextField(
-                                                            icon: const Icon(
-                                                                Icons.tag),
+                                                            leadIcon:
+                                                                const Icon(
+                                                                    Icons.tag),
                                                             label: "Name",
                                                             textEditingController:
                                                                 firstNameController,
@@ -141,8 +142,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                       ),
                                                       Expanded(
                                                         child: CustomTextField(
-                                                            icon: const Icon(
-                                                                Icons.tag),
+                                                            leadIcon:
+                                                                const Icon(
+                                                                    Icons.tag),
                                                             label: "Surname",
                                                             textEditingController:
                                                                 lastNameController,
@@ -159,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     ],
                                                   ),
                                                   CustomTextField(
-                                                    icon:
+                                                    leadIcon:
                                                         const Icon(Icons.email),
                                                     label: "Email",
                                                     textEditingController:
@@ -178,9 +180,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     },
                                                   ),
                                                   CustomTextField(
-                                                    icon:
+                                                    leadIcon:
                                                         const Icon(Icons.lock),
-                                                    secureText: true,
+                                                    onTrailingIconPressed: () {
+                                                      setState(() {
+                                                        isVisible = !isVisible;
+                                                      });
+                                                    },
+                                                    trailingIcon: isVisible
+                                                        ? const Icon(
+                                                            Icons.visibility)
+                                                        : const Icon(Icons
+                                                            .visibility_off),
+                                                    secureText: !isVisible,
                                                     label: "Password",
                                                     textEditingController:
                                                         passwordController,
@@ -196,8 +208,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     },
                                                   ),
                                                   CustomTextField(
-                                                      icon: const Icon(
+                                                      secureText: !isVisible,
+                                                      leadIcon: const Icon(
                                                           Icons.lock),
+                                                      onTrailingIconPressed:
+                                                          () {
+                                                        setState(() {
+                                                          isVisible =
+                                                              !isVisible;
+                                                        });
+                                                      },
+                                                      trailingIcon: isVisible
+                                                          ? const Icon(
+                                                              Icons.visibility)
+                                                          : const Icon(Icons
+                                                              .visibility_off),
                                                       label: "Confirm Password",
                                                       textEditingController:
                                                           confirmPasswordController,
@@ -222,7 +247,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               child: Column(
                                                 children: [
                                                   CustomTextField(
-                                                    icon:
+                                                    leadIcon:
                                                         const Icon(Icons.phone),
                                                     label: "Phone",
                                                     textEditingController:
